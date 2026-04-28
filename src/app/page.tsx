@@ -98,6 +98,9 @@ export default function LandingPage() {
   // Active expanded view
   const [activeView, setActiveView] = useState<ViewId>(null);
 
+  // Guide modal
+  const [showGuideModal, setShowGuideModal] = useState(false);
+
   // Password modal for Rincian
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -427,10 +430,8 @@ export default function LandingPage() {
                 
                 {/* Tombol User Guide */}
                 <div style={{ marginTop: '24px' }}>
-                  <a 
-                    href="/UserGuide.pdf" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <button 
+                    onClick={() => setShowGuideModal(true)}
                     style={{ 
                       display: 'inline-flex', 
                       alignItems: 'center', 
@@ -442,7 +443,7 @@ export default function LandingPage() {
                       borderRadius: '50px', 
                       fontWeight: 600, 
                       fontSize: '14px', 
-                      textDecoration: 'none', 
+                      cursor: 'pointer',
                       backdropFilter: 'blur(10px)',
                       boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                       transition: 'all 0.3s ease'
@@ -456,9 +457,9 @@ export default function LandingPage() {
                       e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
-                    <i className="fas fa-file-pdf" style={{ color: '#ef4444', fontSize: '16px' }}></i>
+                    <i className="fas fa-book-open" style={{ color: '#10b981', fontSize: '16px' }}></i>
                     User Guide
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1037,6 +1038,45 @@ export default function LandingPage() {
               ) : (
                 <><i className="fas fa-sign-in-alt"></i> Masuk</>)}
             </button>
+          </div>
+        </div>
+      )}
+      {/* Guide Options Modal */}
+      {showGuideModal && (
+        <div className="modal-overlay" onClick={() => setShowGuideModal(false)} style={{ zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(12px)' }}>
+          <div className="modal-content panel-anim" onClick={(e) => e.stopPropagation()} style={{ background: 'var(--bg-card)', border: '1px solid rgba(255,255,255,0.1)', maxWidth: '400px', width: '90vw', borderRadius: '24px', padding: '32px', boxShadow: '0 24px 48px rgba(0,0,0,0.4)', position: 'relative' }}>
+            <button onClick={() => setShowGuideModal(false)} style={{ position: 'absolute', top: '24px', right: '24px', background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '16px', padding: '4px' }}>
+              <i className="fas fa-times"></i>
+            </button>
+            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'rgba(16,185,129,0.1)', color: '#10b981', fontSize: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <i className="fas fa-book-open"></i>
+              </div>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f0f4ff', margin: '0 0 8px' }}>User Guide E.T.I.S</h2>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                Pilih format panduan yang ingin Anda lihat.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <a href="/UserGuide.pdf" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', textDecoration: 'none', transition: 'transform 0.2s' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)' }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
+                  <i className="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                  <div style={{ color: '#f0f4ff', fontWeight: 700, fontSize: '15px', marginBottom: '2px' }}>Panduan Teks (PDF)</div>
+                  <div style={{ color: '#ef4444', fontSize: '12px' }}>Buka Dokumen</div>
+                </div>
+              </a>
+              <a href="/UserGuideVideo.mp4" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '16px', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)', textDecoration: 'none', transition: 'transform 0.2s' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)' }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.2)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
+                  <i className="fas fa-play-circle"></i>
+                </div>
+                <div>
+                  <div style={{ color: '#f0f4ff', fontWeight: 700, fontSize: '15px', marginBottom: '2px' }}>Panduan Video (MP4)</div>
+                  <div style={{ color: '#3b82f6', fontSize: '12px' }}>Tonton Video Tutorial</div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       )}
