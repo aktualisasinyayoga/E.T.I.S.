@@ -1,0 +1,176 @@
+[
+    {
+        "id": "pusat-itjen",
+        "nama": "Inspektorat Jenderal",
+        "tipe": "pusat",
+        "singkatan": "Itjen"
+    },
+    {
+        "id": "pusat-dirjen-idp",
+        "nama": "Dirjen Instrumen dan Penguatan",
+        "tipe": "pusat",
+        "singkatan": "Ditjen IDP"
+    },
+    {
+        "id": "pusat-dirjen-pdk",
+        "nama": "Dirjen Pelayanan dan Kepatuhan",
+        "tipe": "pusat",
+        "singkatan": "Ditjen PDK"
+    },
+    {
+        "id": "pusat-pusdatin",
+        "nama": "Pusat Data dan Informasi",
+        "tipe": "pusat",
+        "singkatan": "Pusdatin"
+    },
+    {
+        "id": "pusat-biro-renks",
+        "nama": "Biro Perencanaan dan Kerja Sama",
+        "tipe": "pusat",
+        "singkatan": "Biro Ren & KS"
+    },
+    {
+        "id": "pusat-biro-sho",
+        "nama": "Biro SDM, Hukum, Ortala",
+        "tipe": "pusat",
+        "singkatan": "Biro SHO"
+    },
+    {
+        "id": "pusat-biro-keu",
+        "nama": "Biro Keuangan dan BMN",
+        "tipe": "pusat",
+        "singkatan": "Biro Keu"
+    },
+    {
+        "id": "pusat-biro-uph",
+        "nama": "Biro Umum, Protokol, dan Humas",
+        "tipe": "pusat",
+        "singkatan": "Biro UPH"
+    },
+    {
+        "id": "kanwil-aceh",
+        "nama": "Kanwil Aceh",
+        "tipe": "kanwil",
+        "singkatan": "Aceh"
+    },
+    {
+        "id": "kanwil-sumbar",
+        "nama": "Kanwil Sumatera Barat",
+        "tipe": "kanwil",
+        "singkatan": "Sumbar"
+    },
+    {
+        "id": "kanwil-jambi",
+        "nama": "Kanwil Jambi",
+        "tipe": "kanwil",
+        "singkatan": "Jambi"
+    },
+    {
+        "id": "kanwil-babel",
+        "nama": "Kanwil Kepulauan Bangka Belitung",
+        "tipe": "kanwil",
+        "singkatan": "Babel"
+    },
+    {
+        "id": "kanwil-sumsel",
+        "nama": "Kanwil Sumatera Selatan",
+        "tipe": "kanwil",
+        "singkatan": "Sumsel"
+    },
+    {
+        "id": "kanwil-lampung",
+        "nama": "Kanwil Lampung",
+        "tipe": "kanwil",
+        "singkatan": "Lampung"
+    },
+    {
+        "id": "kanwil-banten",
+        "nama": "Kanwil Banten",
+        "tipe": "kanwil",
+        "singkatan": "Banten"
+    },
+    {
+        "id": "kanwil-ntt",
+        "nama": "Kanwil Nusa Tenggara Timur",
+        "tipe": "kanwil",
+        "singkatan": "NTT"
+    },
+    {
+        "id": "kanwil-kalteng",
+        "nama": "Kanwil Kalimantan Tengah",
+        "tipe": "kanwil",
+        "singkatan": "Kalteng"
+    },
+    {
+        "id": "kanwil-kaltim",
+        "nama": "Kanwil Kalimantan Timur",
+        "tipe": "kanwil",
+        "singkatan": "Kaltim"
+    },
+    {
+        "id": "kanwil-kalsel",
+        "nama": "Kanwil Kalimantan Selatan",
+        "tipe": "kanwil",
+        "singkatan": "Kalsel"
+    },
+    {
+        "id": "kanwil-sulbar",
+        "nama": "Kanwil Sulawesi Barat",
+        "tipe": "kanwil",
+        "singkatan": "Sulbar"
+    },
+    {
+        "id": "kanwil-sulteng",
+        "nama": "Kanwil Sulawesi Tengah",
+        "tipe": "kanwil",
+        "singkatan": "Sulteng"
+    },
+    {
+        "id": "kanwil-sulsel",
+        "nama": "Kanwil Sulawesi Selatan",
+        "tipe": "kanwil",
+        "singkatan": "Sulsel"
+    },
+    {
+        "id": "kanwil-pabar",
+        "nama": "Kanwil Papua Barat",
+        "tipe": "kanwil",
+        "singkatan": "Pabar"
+    },
+    {
+        "id": "kanwil-dkj",
+        "nama": "Kanwil Daerah Khusus Jakarta",
+        "tipe": "kanwil",
+        "singkatan": "DKJ"
+    },
+    {
+        "id": "kanwil-jabar",
+        "nama": "Kanwil Jawa Barat",
+        "tipe": "kanwil",
+        "singkatan": "Jabar"
+    },
+    {
+        "id": "kanwil-jateng",
+        "nama": "Kanwil Jawa Tengah",
+        "tipe": "kanwil",
+        "singkatan": "Jateng"
+    },
+    {
+        "id": "pusat-ppsdm",
+        "nama": "Pusat Pengembangan Sumber Daya Manusia",
+        "tipe": "pusat",
+        "singkatan": "PPSDM"
+    },
+    {
+        "id": "kanwil-jatim",
+        "nama": "Kanwil Jawa Timur",
+        "tipe": "kanwil",
+        "singkatan": "Jatim"
+    },
+    {
+        "id": "kanwil-sumut",
+        "nama": "Kanwil Sumatera Utara",
+        "tipe": "kanwil",
+        "singkatan": "Sumut"
+    }
+]

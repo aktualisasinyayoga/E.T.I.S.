@@ -1,0 +1,167 @@
+[
+    {
+        "id": 1,
+        "nama": "Pelatihan Dasar CPNS Golongan III",
+        "tempat": "Pusdiklat Kementerian Hukum dan HAM, Depok",
+        "tanggalMulai": "2026-03-15",
+        "tanggalSelesai": "2026-04-15",
+        "jp": 80,
+        "deskripsi": "Pelatihan dasar untuk CPNS golongan III yang meliputi materi bela negara, nilai-nilai dasar PNS, dan kedudukan PNS dalam NKRI.",
+        "kuota": 40,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 2,
+        "nama": "Workshop Penguatan Kapasitas HAM",
+        "tempat": "Hotel Borobudur, Jakarta Pusat",
+        "tanggalMulai": "2026-03-20",
+        "tanggalSelesai": "2026-03-22",
+        "jp": 20,
+        "deskripsi": "Workshop penguatan kapasitas aparatur dalam penegakan dan perlindungan Hak Asasi Manusia di Indonesia.",
+        "kuota": 30,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 3,
+        "nama": "Bimtek Transformasi Digital Pelayanan Publik",
+        "tempat": "Gedung Utama Kemenkumham, Jakarta",
+        "tanggalMulai": "2026-04-05",
+        "tanggalSelesai": "2026-04-07",
+        "jp": 24,
+        "deskripsi": "Bimbingan teknis transformasi digital untuk meningkatkan kualitas pelayanan publik berbasis teknologi informasi.",
+        "kuota": 50,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 4,
+        "nama": "Pelatihan Kepemimpinan Administrator (PKA)",
+        "tempat": "Pusdiklat Kementerian Hukum dan HAM, Depok",
+        "tanggalMulai": "2026-04-10",
+        "tanggalSelesai": "2026-05-20",
+        "jp": 120,
+        "deskripsi": "Pelatihan struktural untuk pejabat administrator yang bertujuan meningkatkan kapasitas kepemimpinan kinerja.",
+        "kuota": 25,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 5,
+        "nama": "Seminar Nasional Penegakan HAM di Era Digital",
+        "tempat": "Auditorium BPHN, Jakarta Selatan",
+        "tanggalMulai": "2026-05-02",
+        "tanggalSelesai": "2026-05-02",
+        "jp": 8,
+        "deskripsi": "Seminar nasional membahas tantangan penegakan HAM di era digital termasuk perlindungan data pribadi dan kebebasan berekspresi.",
+        "kuota": 200,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 6,
+        "nama": "Pelatihan Analisis Data untuk Kebijakan Publik",
+        "tempat": "Online via Zoom Meeting",
+        "tanggalMulai": "2026-03-25",
+        "tanggalSelesai": "2026-03-27",
+        "jp": 16,
+        "deskripsi": "Pelatihan analisis data menggunakan tools modern untuk mendukung pengambilan kebijakan berbasis data (evidence-based policy).",
+        "kuota": 60,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 7,
+        "nama": "Workshop Penulisan Karya Tulis Ilmiah",
+        "tempat": "Hotel Santika, Semarang",
+        "tanggalMulai": "2026-05-10",
+        "tanggalSelesai": "2026-05-12",
+        "jp": 20,
+        "deskripsi": "Workshop untuk meningkatkan kemampuan aparatur dalam menyusun karya tulis ilmiah yang berkualitas.",
+        "kuota": 35,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 8,
+        "nama": "Pelatihan Manajemen Risiko Organisasi",
+        "tempat": "Pusdiklat Kementerian Hukum dan HAM, Depok",
+        "tanggalMulai": "2026-06-01",
+        "tanggalSelesai": "2026-06-03",
+        "jp": 20,
+        "deskripsi": "Pelatihan manajemen risiko untuk seluruh unit kerja dalam rangka penerapan sistem pengendalian intern pemerintah (SPIP).",
+        "kuota": 40,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 9,
+        "nama": "Pelatihan Kepemimpinan Pengawas (PKP) Angkatan I",
+        "tempat": "BPSDM Hukum dan HAM, Cinere",
+        "tanggalMulai": "2026-06-15",
+        "tanggalSelesai": "2026-09-15",
+        "jp": 900,
+        "deskripsi": "Pelatihan struktural untuk pejabat pengawas yang bertujuan meningkatkan kapasitas kepemimpinan pelayanan.",
+        "kuota": 40,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 10,
+        "nama": "Pelatihan Kepemimpinan Pengawas (PKP) Angkatan II",
+        "tempat": "BPSDM Hukum dan HAM, Cinere",
+        "tanggalMulai": "2026-07-20",
+        "tanggalSelesai": "2026-10-20",
+        "jp": 900,
+        "deskripsi": "Pelatihan struktural untuk pejabat pengawas gelombang kedua tahun anggaran 2026.",
+        "kuota": 40,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 11,
+        "nama": "Pelatihan Kepemimpinan Administrator (PKA) Angkatan II",
+        "tempat": "BPSDM Hukum dan HAM, Cinere",
+        "tanggalMulai": "2026-08-01",
+        "tanggalSelesai": "2026-11-01",
+        "jp": 900,
+        "deskripsi": "Pelatihan struktural PKA angkatan kedua untuk meningkatkan kapasitas kepemimpinan kinerja.",
+        "kuota": 30,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 12,
+        "nama": "Pelatihan Kepemimpinan Nasional Tingkat I (PKN I) Angkatan I",
+        "tempat": "LAN RI, Pejompongan",
+        "tanggalMulai": "2026-05-10",
+        "tanggalSelesai": "2026-09-10",
+        "jp": 1200,
+        "deskripsi": "Pelatihan struktural tingkat nasional (PKN I) untuk mencetak pimpinan tinggi madya yang kompeten.",
+        "kuota": 20,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 13,
+        "nama": "Pelatihan Kepemimpinan Nasional Tingkat I (PKN I) Angkatan II",
+        "tempat": "LAN RI, Pejompongan",
+        "tanggalMulai": "2026-08-15",
+        "tanggalSelesai": "2026-12-15",
+        "jp": 1200,
+        "deskripsi": "Pelatihan struktural tingkat nasional (PKN I) gelombang kedua.",
+        "kuota": 20,
+        "status": "Segera Dibuka"
+    },
+    {
+        "id": 14,
+        "nama": "Pelatihan Kepemimpinan Nasional Tingkat II (PKN II) Angkatan I",
+        "tempat": "BPSDM Hukum dan HAM & LAN RI",
+        "tanggalMulai": "2026-06-01",
+        "tanggalSelesai": "2026-09-30",
+        "jp": 900,
+        "deskripsi": "Pelatihan struktural tingkat nasional PKN II untuk mencetak pimpinan tinggi pratama wilayah dan pusat.",
+        "kuota": 25,
+        "status": "Pendaftaran Dibuka"
+    },
+    {
+        "id": 15,
+        "nama": "Pelatihan Kepemimpinan Nasional Tingkat II (PKN II) Angkatan II",
+        "tempat": "BPSDM Hukum dan HAM & LAN RI",
+        "tanggalMulai": "2026-09-01",
+        "tanggalSelesai": "2026-12-30",
+        "jp": 900,
+        "deskripsi": "Pelatihan kepemimpinan tingkat tinggi pratama PKN II gelombang II.",
+        "kuota": 25,
+        "status": "Segera Dibuka"
+    }
+]

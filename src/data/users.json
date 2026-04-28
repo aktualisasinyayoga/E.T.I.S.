@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "email": "admin@kemenkumham.go.id",
+        "nama": "Administrator",
+        "nip": "198001011999011001",
+        "isRegistered": true,
+        "role": "admin"
+    },
+    {
+        "id": 2,
+        "email": "ahmad.fauzi@kemenkumham.go.id",
+        "nama": "Ahmad Fauzi",
+        "nip": "198501012010011001",
+        "isRegistered": true,
+        "role": "user"
+    },
+    {
+        "id": 3,
+        "email": "siti.nurhaliza@kemenkumham.go.id",
+        "nama": "Siti Nurhaliza",
+        "nip": "199003152015022001",
+        "isRegistered": true,
+        "role": "user"
+    }
+]
