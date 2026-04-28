@@ -424,6 +424,42 @@ export default function LandingPage() {
                     (Sistem Informasi Pelatihan Pegawai)
                   </p>
                 </div>
+                
+                {/* Tombol User Guide */}
+                <div style={{ marginTop: '24px' }}>
+                  <a 
+                    href="/UserGuide.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '8px', 
+                      padding: '12px 24px', 
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)', 
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      color: '#ffffff', 
+                      borderRadius: '50px', 
+                      fontWeight: 600, 
+                      fontSize: '14px', 
+                      textDecoration: 'none', 
+                      backdropFilter: 'blur(10px)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => { 
+                      e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => { 
+                      e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    <i className="fas fa-file-pdf" style={{ color: '#ef4444', fontSize: '16px' }}></i>
+                    User Guide
+                  </a>
+                </div>
               </div>
             </div>
 
