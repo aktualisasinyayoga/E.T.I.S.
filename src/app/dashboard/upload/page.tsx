@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
 interface Certificate {
     id: string;
+    employeeId: number;
+    employeeName: string;
     namaPelatihan: string;
     tanggalUpload: string;
     jp: number;
@@ -11,6 +14,7 @@ interface Certificate {
 }
 
 export default function UploadPage() {
+    const { user } = useAuth();
     const [file, setFile] = useState<File | null>(null);
     const [namaPelatihan, setNamaPelatihan] = useState('');
     const [tanggal, setTanggal] = useState('');
@@ -55,18 +59,23 @@ export default function UploadPage() {
 
         setIsUploading(true);
         try {
-            const res = await fetch('/api/certificates', { method: 'POST' });
+            const res = await fetch('/api/certificates', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    employeeId: user?.id || 0,
+                    employeeName: user?.nama || 'Unknown',
+                    namaPelatihan,
+                    tanggalUpload: tanggal || new Date().toISOString().split('T')[0],
+                    jp: parseInt(jp),
+                }),
+            });
             const data = await res.json();
 
             if (data.success) {
                 setUploadSuccess(true);
-                setCertificates(prev => [{
-                    id: data.id,
-                    namaPelatihan,
-                    tanggalUpload: new Date().toISOString().split('T')[0],
-                    jp: parseInt(jp),
-                    status: 'pending',
-                }, ...prev]);
+                // Refresh the list from Supabase
+                await fetchCertificates();
 
                 // Reset form
                 setTimeout(() => {

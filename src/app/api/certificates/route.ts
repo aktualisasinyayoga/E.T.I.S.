@@ -1,110 +1,130 @@
-import { NextResponse } from 'next/server';
-import { getEmployees } from '@/data/employeeStore';
+import { NextRequest, NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
-// In-memory certificates store
-const certificates = [
-    {
-        id: 'CERT-001',
-        employeeId: 1,
-        employeeName: 'Ahmad Fauzi',
-        namaPelatihan: 'Workshop Penguatan Kapasitas HAM',
-        tanggalUpload: '2026-02-10',
-        jp: 20,
-        status: 'approved',
-    },
-    {
-        id: 'CERT-002',
-        employeeId: 2,
-        employeeName: 'Siti Nurhaliza',
-        namaPelatihan: 'Bimtek Transformasi Digital',
-        tanggalUpload: '2026-02-15',
-        jp: 24,
-        status: 'pending',
-    },
-    {
-        id: 'CERT-003',
-        employeeId: 3,
-        employeeName: 'Budi Santoso',
-        namaPelatihan: 'Pelatihan Analisis Kebijakan Publik',
-        tanggalUpload: '2026-02-18',
-        jp: 16,
-        status: 'pending',
-    },
-    {
-        id: 'CERT-004',
-        employeeId: 5,
-        employeeName: 'Rizky Pratama',
-        namaPelatihan: 'Diklat Pelayanan Publik',
-        tanggalUpload: '2026-02-20',
-        jp: 12,
-        status: 'pending',
-    },
-    {
-        id: 'CERT-005',
-        employeeId: 11,
-        employeeName: 'Agus Purnomo',
-        namaPelatihan: 'Workshop Manajemen SDM Aparatur',
-        tanggalUpload: '2026-02-22',
-        jp: 20,
-        status: 'pending',
-    },
-];
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
 
-export async function POST() {
-    return NextResponse.json({
-        success: true,
-        message: 'Sertifikat berhasil diupload dan sedang dalam proses verifikasi.',
-        id: `CERT-${Date.now()}`,
-        status: 'pending',
-    });
+        const newCert = {
+            id: body.id || `CERT-${Date.now()}`,
+            employee_id: body.employeeId || 0,
+            employee_name: body.employeeName || 'Unknown',
+            nama_pelatihan: body.namaPelatihan || '',
+            tanggal_upload: body.tanggalUpload || new Date().toISOString().split('T')[0],
+            jp: body.jp || 0,
+            status: 'pending',
+        };
+
+        const { data, error } = await supabase
+            .from('certificates')
+            .insert(newCert)
+            .select()
+            .single();
+
+        if (error) {
+            console.error('Supabase insert error:', error);
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
+
+        return NextResponse.json({
+            success: true,
+            message: 'Sertifikat berhasil diupload dan sedang dalam proses verifikasi.',
+            certificate: {
+                id: data.id,
+                employeeId: data.employee_id,
+                employeeName: data.employee_name,
+                namaPelatihan: data.nama_pelatihan,
+                tanggalUpload: data.tanggal_upload,
+                jp: data.jp,
+                status: data.status,
+            },
+        });
+    } catch (err) {
+        console.error('POST error:', err);
+        return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+    }
 }
 
 export async function GET() {
-    return NextResponse.json(certificates);
+    try {
+        const { data, error } = await supabase
+            .from('certificates')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Supabase select error:', error);
+            return NextResponse.json([]);
+        }
+
+        // Map snake_case DB columns to camelCase for frontend
+        const certificates = (data || []).map(row => ({
+            id: row.id,
+            employeeId: row.employee_id,
+            employeeName: row.employee_name,
+            namaPelatihan: row.nama_pelatihan,
+            tanggalUpload: row.tanggal_upload,
+            jp: row.jp,
+            status: row.status,
+        }));
+
+        return NextResponse.json(certificates);
+    } catch (err) {
+        console.error('GET error:', err);
+        return NextResponse.json([]);
+    }
 }
 
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
     try {
-        const employees = getEmployees();
         const { certificateId, action } = await request.json();
 
-        const certIdx = certificates.findIndex(c => c.id === certificateId);
-        if (certIdx === -1) {
+        if (action !== 'approve' && action !== 'reject') {
+            return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
+        }
+
+        const newStatus = action === 'approve' ? 'approved' : 'rejected';
+
+        const { data, error } = await supabase
+            .from('certificates')
+            .update({ status: newStatus })
+            .eq('id', certificateId)
+            .select()
+            .single();
+
+        if (error) {
+            console.error('Supabase update error:', error);
             return NextResponse.json({ error: 'Certificate not found' }, { status: 404 });
         }
 
-        const cert = certificates[certIdx];
+        const cert = data;
 
         if (action === 'approve') {
-            certificates[certIdx] = { ...cert, status: 'approved' };
-
-            // Find and update the employee JP in the shared store
-            const empIdx = employees.findIndex(e => e.id === cert.employeeId);
-            if (empIdx !== -1) {
-                employees[empIdx] = {
-                    ...employees[empIdx],
-                    jumlahJP: employees[empIdx].jumlahJP + cert.jp,
-                };
-            }
-
             return NextResponse.json({
                 success: true,
-                certificate: certificates[certIdx],
-                employeeUpdated: empIdx !== -1,
-                newJP: empIdx !== -1 ? employees[empIdx].jumlahJP : null,
-                message: `Sertifikat berhasil diverifikasi. JP ${cert.employeeName} bertambah ${cert.jp} JP.`,
+                certificate: {
+                    id: cert.id,
+                    employeeId: cert.employee_id,
+                    employeeName: cert.employee_name,
+                    namaPelatihan: cert.nama_pelatihan,
+                    tanggalUpload: cert.tanggal_upload,
+                    jp: cert.jp,
+                    status: cert.status,
+                },
+                message: `Sertifikat berhasil diverifikasi. JP ${cert.employee_name} bertambah ${cert.jp} JP.`,
             });
-        } else if (action === 'reject') {
-            certificates[certIdx] = { ...cert, status: 'rejected' };
+        } else {
             return NextResponse.json({
                 success: true,
-                certificate: certificates[certIdx],
+                certificate: {
+                    id: cert.id,
+                    status: cert.status,
+                },
                 message: 'Sertifikat ditolak.',
             });
         }
-
-        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
-    } catch {
+    } catch (err) {
+        console.error('PUT error:', err);
         return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 }

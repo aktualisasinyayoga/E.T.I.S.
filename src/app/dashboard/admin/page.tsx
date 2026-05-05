@@ -173,6 +173,8 @@ export default function AdminPage() {
             if (data.success) {
                 showNotif(data.message, 'success');
                 fetchAll();
+            } else {
+                showNotif('Gagal memverifikasi sertifikat.', 'error');
             }
         } catch {
             showNotif('Gagal memverifikasi sertifikat.', 'error');
