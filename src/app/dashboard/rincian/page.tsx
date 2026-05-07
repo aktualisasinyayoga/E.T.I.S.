@@ -107,9 +107,9 @@ function RincianContent() {
                         jp: c.jp,
                     }));
                 setCertificates(myCerts);
-                // Total JP = base JP from employee data + newly approved certs JP
+                // Total JP = strictly the sum of all approved certificates
                 const totalCertsJp = myCerts.reduce((sum: number, c: Certificate) => sum + c.jp, 0);
-                setTotalJp(baseJp + totalCertsJp);
+                setTotalJp(totalCertsJp);
             } catch (err) {
                 console.error('Failed to fetch certificates:', err);
             }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getEmployees } from '@/data/employeeStore';
+import { supabase } from '@/lib/supabase';
 
 export async function GET(request: NextRequest) {
     const employees = getEmployees();
@@ -10,6 +11,30 @@ export async function GET(request: NextRequest) {
 
     if (unitKerja) {
         result = result.filter((e) => e.unitKerja === unitKerja);
+    }
+
+    // Fetch real JP from Supabase for accurate counts
+    try {
+        const { data, error } = await supabase
+            .from('certificates')
+            .select('employee_id, jp')
+            .eq('status', 'approved');
+        
+        if (!error && data) {
+            // Group JP by employee_id
+            const jpMap: Record<number, number> = {};
+            data.forEach((cert) => {
+                jpMap[cert.employee_id] = (jpMap[cert.employee_id] || 0) + cert.jp;
+            });
+            
+            // Override local JSON JP with real Supabase JP
+            result = result.map(emp => ({
+                ...emp,
+                jumlahJP: jpMap[emp.id] || 0
+            }));
+        }
+    } catch (e) {
+        console.error('Failed to fetch JP from Supabase', e);
     }
 
     result.sort((a, b) => a.jumlahJP - b.jumlahJP);
