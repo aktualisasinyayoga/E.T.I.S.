@@ -85,9 +85,12 @@ export default function UploadPage() {
                     setJp('');
                     setUploadSuccess(false);
                 }, 3000);
+            } else {
+                alert(`Gagal mengupload sertifikat: ${data.error || 'Terjadi kesalahan pada server'}`);
             }
         } catch (err) {
             console.error('Upload failed:', err);
+            alert(`Gagal mengupload sertifikat: Jaringan atau server bermasalah`);
         } finally {
             setIsUploading(false);
         }
