@@ -22,5 +22,13 @@
         "nip": "199003152015022001",
         "isRegistered": true,
         "role": "user"
+    },
+    {
+        "id": 551,
+        "email": "muhammad.1008@kemenkumham.go.id",
+        "nama": "MUHAMMAD YOGA RIDWAN, S.KOM",
+        "nip": "200103092025061008",
+        "isRegistered": true,
+        "role": "user"
     }
 ]

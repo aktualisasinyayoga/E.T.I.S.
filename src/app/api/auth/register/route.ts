@@ -11,7 +11,7 @@ export async function POST(request: Request) {
             const user = {
                 id: employee.id,
                 email: employee.email,
-                nama: nama || employee.nama,
+                nama: employee.nama,
                 nip: employee.nip,
                 isRegistered: true,
                 role: 'user',
