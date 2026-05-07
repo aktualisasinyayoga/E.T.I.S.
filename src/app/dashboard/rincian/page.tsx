@@ -71,9 +71,12 @@ function RincianContent() {
     useEffect(() => {
         const urlNama = searchParams.get('nama') || 'Pegawai';
         const urlNip = searchParams.get('nip') || '';
+        const urlEmpId = parseInt(searchParams.get('empId') || '0', 10);
+        const baseJp = parseInt(searchParams.get('jp') || '0', 10);
 
         setNama(urlNama);
         setNip(urlNip);
+        setTotalJp(baseJp);
 
         // Fetch real certificates from Supabase (only approved ones for this employee)
         const fetchCertificates = async () => {
@@ -81,10 +84,17 @@ function RincianContent() {
                 const res = await fetch('/api/certificates');
                 const data = await res.json();
                 // Filter: only approved certificates for this employee
+                // Match by employeeId (most reliable) OR by name (case-insensitive, trimmed)
                 const myCerts = (data || [])
-                    .filter((c: { employeeName: string; status: string }) => 
-                        c.employeeName === urlNama && c.status === 'approved'
-                    )
+                    .filter((c: { employeeId: number; employeeName: string; status: string }) => {
+                        if (c.status !== 'approved') return false;
+                        // Match by employee ID if available
+                        if (urlEmpId > 0 && c.employeeId === urlEmpId) return true;
+                        // Fallback: match by name (case-insensitive)
+                        const certName = (c.employeeName || '').trim().toLowerCase();
+                        const pageName = urlNama.trim().toLowerCase();
+                        return certName === pageName || certName.includes(pageName) || pageName.includes(certName);
+                    })
                     .map((c: { id: string; namaPelatihan: string; tanggalUpload: string; jp: number }) => ({
                         id: c.id,
                         namaPelatihan: c.namaPelatihan,
@@ -92,15 +102,12 @@ function RincianContent() {
                         jp: c.jp,
                     }));
                 setCertificates(myCerts);
-                // Calculate total JP from approved certificates
-                const jpFromCerts = myCerts.reduce((sum: number, c: Certificate) => sum + c.jp, 0);
-                // Also include base JP from URL (from employees.json)
-                const baseJp = parseInt(searchParams.get('jp') || '0', 10);
-                setTotalJp(Math.max(baseJp, jpFromCerts + baseJp));
+                // Total JP = base JP from employee data (already includes verified certs)
+                if (myCerts.length > 0) {
+                    setTotalJp(baseJp);
+                }
             } catch (err) {
                 console.error('Failed to fetch certificates:', err);
-                // Fallback to URL JP
-                setTotalJp(parseInt(searchParams.get('jp') || '0', 10));
             }
         };
         fetchCertificates();

@@ -59,7 +59,7 @@ export default function DashboardPage() {
             setShowPasswordModal(false);
             setPasswordInput('');
             setPasswordError('');
-            window.open(`/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}`, '_blank');
+            window.open(`/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`, '_blank');
         } else {
             setPasswordError('Password salah. Silakan coba lagi.');
         }
