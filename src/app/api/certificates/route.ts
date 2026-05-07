@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { getEmployees } from '@/data/employeeStore';
 
 export async function POST(request: NextRequest) {
     try {
@@ -100,6 +101,15 @@ export async function PUT(request: NextRequest) {
         const cert = data;
 
         if (action === 'approve') {
+            // Update employee JP in the in-memory store
+            const employees = getEmployees();
+            const empIdx = employees.findIndex(e => 
+                e.nama === cert.employee_name || e.id === cert.employee_id
+            );
+            if (empIdx !== -1) {
+                employees[empIdx].jumlahJP += cert.jp;
+            }
+
             return NextResponse.json({
                 success: true,
                 certificate: {

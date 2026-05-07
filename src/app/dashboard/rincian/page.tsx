@@ -71,43 +71,39 @@ function RincianContent() {
     useEffect(() => {
         const urlNama = searchParams.get('nama') || 'Pegawai';
         const urlNip = searchParams.get('nip') || '';
-        const urlJp = parseInt(searchParams.get('jp') || '0', 10);
 
         setNama(urlNama);
         setNip(urlNip);
-        setTotalJp(urlJp);
 
-        // Generate dummy certificates
-        let remaining = urlJp;
-        const certs: Certificate[] = [];
-        let id = 1;
-        const pelatihanNames = [
-            "Pelatihan Manajemen Publik",
-            "Workshop Peningkatan Kapasitas",
-            "Bimbingan Teknis Administrasi",
-            "Seminar Hak Asasi Manusia",
-            "Pelatihan Pengolahan Data",
-            "Sosialisasi Kebijakan Baru"
-        ];
-
-        while (remaining > 0) {
-            let currentJp = 0;
-            if (remaining >= 20) currentJp = 20;
-            else if (remaining >= 10) currentJp = 10;
-            else if (remaining >= 5) currentJp = 5;
-            else currentJp = remaining;
-
-            certs.push({
-                id: `CERT-${new Date().getFullYear()}-${String(id).padStart(4, '0')}`,
-                namaPelatihan: pelatihanNames[(id - 1) % pelatihanNames.length],
-                tanggal: new Date(Date.now() - id * 86400000 * Math.floor(Math.random() * 30 + 10)).toISOString().split('T')[0],
-                jp: currentJp
-            });
-            remaining -= currentJp;
-            id++;
-        }
-
-        setCertificates(certs);
+        // Fetch real certificates from Supabase (only approved ones for this employee)
+        const fetchCertificates = async () => {
+            try {
+                const res = await fetch('/api/certificates');
+                const data = await res.json();
+                // Filter: only approved certificates for this employee
+                const myCerts = (data || [])
+                    .filter((c: { employeeName: string; status: string }) => 
+                        c.employeeName === urlNama && c.status === 'approved'
+                    )
+                    .map((c: { id: string; namaPelatihan: string; tanggalUpload: string; jp: number }) => ({
+                        id: c.id,
+                        namaPelatihan: c.namaPelatihan,
+                        tanggal: c.tanggalUpload,
+                        jp: c.jp,
+                    }));
+                setCertificates(myCerts);
+                // Calculate total JP from approved certificates
+                const jpFromCerts = myCerts.reduce((sum: number, c: Certificate) => sum + c.jp, 0);
+                // Also include base JP from URL (from employees.json)
+                const baseJp = parseInt(searchParams.get('jp') || '0', 10);
+                setTotalJp(Math.max(baseJp, jpFromCerts + baseJp));
+            } catch (err) {
+                console.error('Failed to fetch certificates:', err);
+                // Fallback to URL JP
+                setTotalJp(parseInt(searchParams.get('jp') || '0', 10));
+            }
+        };
+        fetchCertificates();
     }, [searchParams]);
 
     return (
@@ -201,7 +197,7 @@ function RincianContent() {
             <div className="glass-card animate-fade-in-up stagger-2" style={{ padding: '32px' }}>
                 <h3 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '24px' }}>
                     <i className="fas fa-list-check" style={{ marginRight: '8px', color: '#818cf8' }}></i>
-                    Daftar Sertifikat Dummy
+                    Daftar Sertifikat Terverifikasi
                 </h3>
 
                 {certificates.length === 0 ? (
