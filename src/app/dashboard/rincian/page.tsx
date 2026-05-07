@@ -23,6 +23,7 @@ function RincianContent() {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [emailStr, setEmailStr] = useState('');
     const [changePasswordError, setChangePasswordError] = useState('');
     const [changePasswordSuccess, setChangePasswordSuccess] = useState(false);
 
@@ -58,10 +59,14 @@ function RincianContent() {
         }
 
         localStorage.setItem(`rincian_password_${nama}`, newPassword);
+        if (emailStr.trim()) {
+            localStorage.setItem(`rincian_email_${nama}`, emailStr);
+        }
         setChangePasswordSuccess(true);
         setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
+        setEmailStr('');
         setTimeout(() => {
             setShowChangePassword(false);
             setChangePasswordSuccess(false);
@@ -102,10 +107,9 @@ function RincianContent() {
                         jp: c.jp,
                     }));
                 setCertificates(myCerts);
-                // Total JP = base JP from employee data (already includes verified certs)
-                if (myCerts.length > 0) {
-                    setTotalJp(baseJp);
-                }
+                // Total JP = base JP from employee data + newly approved certs JP
+                const totalCertsJp = myCerts.reduce((sum: number, c: Certificate) => sum + c.jp, 0);
+                setTotalJp(baseJp + totalCertsJp);
             } catch (err) {
                 console.error('Failed to fetch certificates:', err);
             }
@@ -155,7 +159,7 @@ function RincianContent() {
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <button onClick={() => { setShowChangePassword(true); setChangePasswordError(''); setChangePasswordSuccess(false); setOldPassword(''); setNewPassword(''); setConfirmPassword(''); }} style={{
+                        <button onClick={() => { setShowChangePassword(true); setChangePasswordError(''); setChangePasswordSuccess(false); setOldPassword(''); setNewPassword(''); setConfirmPassword(''); setEmailStr(''); }} style={{
                             display: 'inline-flex', alignItems: 'center', gap: '8px',
                             padding: '10px 20px', borderRadius: '10px',
                             background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.2)',
@@ -354,7 +358,11 @@ function RincianContent() {
                                     <div>
                                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>Konfirmasi Password Baru</label>
                                         <input type="password" value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value); setChangePasswordError(''); }} placeholder="Ulangi password baru" className="input-field" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                                        <div>
+                                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>Email Baru</label>
+                                        <input type="email" value={emailStr} onChange={(e) => { setEmailStr(e.target.value); setChangePasswordError(''); }} placeholder="Masukkan email baru (opsional)" className="input-field" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
                                     </div>
+                                </div>
                                 </div>
                                 {changePasswordError && (
                                     <p style={{ color: '#f87171', fontSize: '12px', marginBottom: '12px', textAlign: 'center' }}>

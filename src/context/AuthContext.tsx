@@ -14,7 +14,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (email: string) => Promise<{ needsRegistration: boolean }>;
+  login: (nip: string) => Promise<{ needsRegistration: boolean }>;
   register: (nama: string, nip: string) => Promise<boolean>;
   logout: () => void;
 }
@@ -37,12 +37,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string): Promise<{ needsRegistration: boolean }> => {
+  const login = async (nip: string): Promise<{ needsRegistration: boolean }> => {
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ nip }),
       });
       const data = await res.json();
 

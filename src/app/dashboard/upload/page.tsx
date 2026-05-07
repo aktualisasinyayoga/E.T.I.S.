@@ -56,6 +56,11 @@ export default function UploadPage() {
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!file || !namaPelatihan || !jp) return;
+        
+        if (!user || !user.id) {
+            alert('Anda harus login terlebih dahulu untuk mengupload sertifikat.');
+            return;
+        }
 
         setIsUploading(true);
         try {
