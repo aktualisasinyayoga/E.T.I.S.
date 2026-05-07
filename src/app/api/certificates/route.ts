@@ -6,10 +6,15 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
 
+        // Look up the employee's official name from employees.json
+        const employees = getEmployees();
+        const employee = employees.find(e => e.id === body.employeeId);
+        const officialName = employee ? employee.nama : (body.employeeName || 'Unknown');
+
         const newCert = {
             id: body.id || `CERT-${Date.now()}`,
             employee_id: body.employeeId || 0,
-            employee_name: body.employeeName || 'Unknown',
+            employee_name: officialName,
             nama_pelatihan: body.namaPelatihan || '',
             tanggal_upload: body.tanggalUpload || new Date().toISOString().split('T')[0],
             jp: body.jp || 0,
