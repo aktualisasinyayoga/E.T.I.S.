@@ -8,6 +8,7 @@ interface Certificate {
     namaPelatihan: string;
     tanggal: string;
     jp: number;
+    fileUrl?: string;
 }
 
 function RincianContent() {
@@ -16,7 +17,6 @@ function RincianContent() {
     const [nip, setNip] = useState<string>('');
     const [totalJp, setTotalJp] = useState<number>(0);
     const [certificates, setCertificates] = useState<Certificate[]>([]);
-    const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
 
     // Change password state
     const [showChangePassword, setShowChangePassword] = useState(false);
@@ -100,11 +100,12 @@ function RincianContent() {
                         const pageName = urlNama.trim().toLowerCase();
                         return certName === pageName || certName.includes(pageName) || pageName.includes(certName);
                     })
-                    .map((c: { id: string; namaPelatihan: string; tanggalUpload: string; jp: number }) => ({
+                    .map((c: { id: string; namaPelatihan: string; tanggalUpload: string; jp: number; fileUrl?: string }) => ({
                         id: c.id,
                         namaPelatihan: c.namaPelatihan,
                         tanggal: c.tanggalUpload,
                         jp: c.jp,
+                        fileUrl: c.fileUrl,
                     }));
                 setCertificates(myCerts);
                 // Total JP = strictly the sum of all approved certificates
@@ -225,7 +226,13 @@ function RincianContent() {
                                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                                 transition: 'all 0.3s', cursor: 'pointer'
                             }}
-                                onClick={() => setSelectedCert(cert)}
+                                onClick={() => {
+                                    if (cert.fileUrl) {
+                                        window.open(cert.fileUrl, '_blank');
+                                    } else {
+                                        alert('File PDF tidak tersedia untuk sertifikat ini (mungkin diunggah sebelum fitur penyimpanan file diaktifkan).');
+                                    }
+                                }}
                                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.borderColor = 'var(--border-glass)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
                                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
@@ -263,67 +270,7 @@ function RincianContent() {
                 )}
             </div>
 
-            {/* Certificate Pop-up Modal */}
-            {selectedCert && (
-                <div className="modal-overlay" onClick={() => setSelectedCert(null)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', padding: 0, overflow: 'hidden' }}>
-                        {/* Certificate Header Form */}
-                        <div style={{ padding: '40px', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1))', borderBottom: '1px solid var(--border-glass)', textAlign: 'center', position: 'relative' }}>
-                            <button
-                                onClick={() => setSelectedCert(null)}
-                                style={{
-                                    position: 'absolute', top: '16px', right: '16px',
-                                    width: '32px', height: '32px', borderRadius: '8px',
-                                    background: 'rgba(255,255,255,0.1)', border: 'none', color: 'var(--text-secondary)',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                                    transition: 'all 0.2s'
-                                }}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'; e.currentTarget.style.color = '#f87171'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
-                            >
-                                <i className="fas fa-times"></i>
-                            </button>
 
-                            <i className="fas fa-certificate" style={{ fontSize: '48px', color: '#818cf8', marginBottom: '16px' }}></i>
-                            <h2 style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px', fontFamily: '"Playfair Display", serif' }}>
-                                SERTIFIKAT PELATIHAN
-                            </h2>
-                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                                Nomor: {selectedCert.id}
-                            </div>
-                        </div>
-
-                        {/* Certificate Body details */}
-                        <div style={{ padding: '40px', textAlign: 'center' }}>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '15px', marginBottom: '8px' }}>Diberikan kepada:</p>
-                            <h3 style={{ fontSize: '24px', fontWeight: 700, color: 'var(--gradient-1)', marginBottom: '32px' }}>{nama}</h3>
-
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '15px', marginBottom: '8px' }}>Atas partisipasinya dalam kegiatan:</p>
-                            <h4 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '32px', lineHeight: 1.4 }}>
-                                {selectedCert.namaPelatihan}
-                            </h4>
-
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px', borderTop: '1px dashed var(--border-glass)', paddingTop: '32px' }}>
-                                <div>
-                                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Diselenggarakan pada</div>
-                                    <div style={{ fontSize: '15px', fontWeight: 600 }}>
-                                        <i className="fas fa-calendar-alt" style={{ marginRight: '6px', color: '#34d399' }}></i>
-                                        {new Date(selectedCert.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                                    </div>
-                                </div>
-                                <div style={{ width: '1px', height: '40px', background: 'var(--border-glass)' }}></div>
-                                <div>
-                                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Beban Pembelajaran</div>
-                                    <div style={{ fontSize: '15px', fontWeight: 600 }}>
-                                        <i className="fas fa-clock" style={{ marginRight: '6px', color: '#34d399' }}></i>
-                                        {selectedCert.jp} Jam Pelajaran
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {/* Change Password Modal */}
             {showChangePassword && (

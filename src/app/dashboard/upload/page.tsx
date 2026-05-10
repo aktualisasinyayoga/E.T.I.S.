@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 interface Certificate {
     id: string;
@@ -64,6 +65,27 @@ export default function UploadPage() {
 
         setIsUploading(true);
         try {
+            let fileUrl = '';
+            
+            // Upload file to Supabase Storage
+            if (file) {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `CERT-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+                const { error: uploadError } = await supabase.storage
+                    .from('certificates')
+                    .upload(fileName, file);
+                
+                if (uploadError) {
+                    throw new Error(`Gagal mengunggah file PDF: ${uploadError.message}`);
+                }
+                
+                const { data: publicUrlData } = supabase.storage
+                    .from('certificates')
+                    .getPublicUrl(fileName);
+                
+                fileUrl = publicUrlData.publicUrl;
+            }
+
             const res = await fetch('/api/certificates', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -73,6 +95,7 @@ export default function UploadPage() {
                     namaPelatihan,
                     tanggalUpload: tanggal || new Date().toISOString().split('T')[0],
                     jp: parseInt(jp),
+                    fileUrl: fileUrl,
                 }),
             });
             const data = await res.json();

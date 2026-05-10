@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
             tanggal_upload: body.tanggalUpload || new Date().toISOString().split('T')[0],
             jp: body.jp || 0,
             status: 'pending',
+            file_url: body.fileUrl || '',
         };
 
         const { data, error } = await supabase
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
                 tanggalUpload: data.tanggal_upload,
                 jp: data.jp,
                 status: data.status,
+                fileUrl: data.file_url,
             },
         });
     } catch (err) {
@@ -75,6 +77,7 @@ export async function GET() {
                 tanggalUpload: row.tanggal_upload,
                 jp: row.jp,
                 status: row.status,
+                fileUrl: row.file_url,
             };
         });
 
