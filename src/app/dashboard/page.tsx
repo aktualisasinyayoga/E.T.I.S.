@@ -56,6 +56,20 @@ export default function DashboardPage() {
         const storedPassword = localStorage.getItem(`rincian_password_${pendingRincianEmp.nama}`);
         const correctPassword = storedPassword || generatePassword(pendingRincianEmp.nama, pendingRincianEmp.nip);
         if (passwordInput === correctPassword) {
+            // Set AuthContext user automatically if not admin
+            const currentUserStr = localStorage.getItem('hrd_user');
+            const currentUser = currentUserStr ? JSON.parse(currentUserStr) : null;
+            if (!currentUser || currentUser.role !== 'admin') {
+                localStorage.setItem('hrd_user', JSON.stringify({
+                    id: pendingRincianEmp.id,
+                    email: '',
+                    nama: pendingRincianEmp.nama,
+                    nip: pendingRincianEmp.nip,
+                    isRegistered: true,
+                    role: 'user'
+                }));
+            }
+
             setShowPasswordModal(false);
             setPasswordInput('');
             setPasswordError('');
