@@ -358,14 +358,34 @@ export default function DashboardPage() {
             {showPasswordModal && pendingRincianEmp && (
                 <div className="modal-overlay" onClick={() => { setShowPasswordModal(false); setPasswordError(''); }} style={{ zIndex: 1001 }}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-glass)', maxWidth: '420px', width: '90vw', padding: '32px' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                             <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#818cf8', fontSize: '24px' }}>
                                 <i className="fas fa-lock"></i>
                             </div>
                             <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#f0f4ff', marginBottom: '8px' }}>Masukkan Password</h3>
                             <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                                Masukkan password untuk melihat rincian sertifikat <strong style={{ color: '#f0f4ff' }}>{pendingRincianEmp.nama}</strong>
+                                Rincian sertifikat <strong style={{ color: '#f0f4ff' }}>{pendingRincianEmp.nama}</strong>
                             </p>
+                        </div>
+
+                        <div style={{
+                            background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)',
+                            borderRadius: '12px', padding: '16px', marginBottom: '24px', textAlign: 'left'
+                        }}>
+                            <div style={{ fontSize: '13px', fontWeight: 700, color: '#34d399', marginBottom: '8px' }}>
+                                <i className="fas fa-lightbulb" style={{ marginRight: '6px' }}></i>
+                                Panduan Password Default
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#e2e8f0', marginBottom: '12px', lineHeight: 1.5 }}>
+                                Password: <strong style={{ color: '#fff' }}>3 digit awal Nama + 4 digit awal NIP</strong> (huruf kecil semua)
+                            </div>
+                            <div style={{ background: 'rgba(0,0,0,0.25)', padding: '10px 12px', borderRadius: '8px', fontSize: '12px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8' }}>
+                                <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                                <div style={{ marginBottom: '8px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
+                                <div style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '6px', marginTop: '4px' }}>
+                                    <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>dr.1234</strong>
+                                </div>
+                            </div>
                         </div>
                         <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
                             <div style={{ marginBottom: '16px' }}>

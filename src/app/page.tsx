@@ -646,7 +646,43 @@ export default function LandingPage() {
                       <i className="fas fa-search" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}></i>
                       <input type="text" value={searchPusat} onChange={(e) => setSearchPusat(e.target.value)} placeholder="Cari unit kerja pusat..." className="input-field" style={{ paddingLeft: '44px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
                     </div>
-                    <div style={{ color: '#ffffff', fontSize: '12px', marginTop: '6px', textAlign: 'right' }}>Password Hint: NIK</div>
+                  </div>
+                </div>
+
+                <div style={{ 
+                  background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15))',
+                  border: '1px solid rgba(99, 102, 241, 0.3)',
+                  borderRadius: '16px', padding: '20px', marginBottom: '24px',
+                  display: 'flex', alignItems: 'flex-start', gap: '20px',
+                }}>
+                  <div style={{ 
+                    width: '48px', height: '48px', borderRadius: '12px', 
+                    background: 'linear-gradient(135deg, #6366f1, #06b6d4)', color: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', flexShrink: 0,
+                  }}>
+                    <i className="fas fa-lightbulb"></i>
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#f0f4ff', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ padding: '2px 8px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', borderRadius: '4px', fontSize: '11px', letterSpacing: '1px' }}>INFO PENTING</span>
+                      Panduan Password Rincian Sertifikat
+                    </h4>
+                    <p style={{ fontSize: '14px', color: '#e2e8f0', marginBottom: '12px', fontWeight: 500 }}>
+                      Password default: <span style={{ color: '#cbd5e1' }}>3 digit awal Nama + 4 digit awal NIP (huruf kecil semua)</span>
+                    </p>
+                    <div style={{ 
+                      background: 'rgba(15, 23, 42, 0.6)', padding: '12px 16px', borderRadius: '8px', 
+                      border: '1px dashed rgba(148, 163, 184, 0.3)',
+                      fontSize: '13px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8',
+                      display: 'inline-block'
+                    }}>
+                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                      <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
+                      <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
+                        <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
+                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>dr.1234</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', paddingBottom: '40px' }}>
@@ -670,7 +706,43 @@ export default function LandingPage() {
                       <i className="fas fa-search" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}></i>
                       <input type="text" value={searchKanwil} onChange={(e) => setSearchKanwil(e.target.value)} placeholder="Cari kantor wilayah..." className="input-field" style={{ paddingLeft: '44px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
                     </div>
-                    <div style={{ color: '#ffffff', fontSize: '12px', marginTop: '6px', textAlign: 'right' }}>Password Hint: NIK</div>
+                  </div>
+                </div>
+
+                <div style={{ 
+                  background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15))',
+                  border: '1px solid rgba(99, 102, 241, 0.3)',
+                  borderRadius: '16px', padding: '20px', marginBottom: '24px',
+                  display: 'flex', alignItems: 'flex-start', gap: '20px',
+                }}>
+                  <div style={{ 
+                    width: '48px', height: '48px', borderRadius: '12px', 
+                    background: 'linear-gradient(135deg, #6366f1, #06b6d4)', color: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', flexShrink: 0,
+                  }}>
+                    <i className="fas fa-lightbulb"></i>
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#f0f4ff', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ padding: '2px 8px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', borderRadius: '4px', fontSize: '11px', letterSpacing: '1px' }}>INFO PENTING</span>
+                      Panduan Password Rincian Sertifikat
+                    </h4>
+                    <p style={{ fontSize: '14px', color: '#e2e8f0', marginBottom: '12px', fontWeight: 500 }}>
+                      Password default: <span style={{ color: '#cbd5e1' }}>3 digit awal Nama + 4 digit awal NIP (huruf kecil semua)</span>
+                    </p>
+                    <div style={{ 
+                      background: 'rgba(15, 23, 42, 0.6)', padding: '12px 16px', borderRadius: '8px', 
+                      border: '1px dashed rgba(148, 163, 184, 0.3)',
+                      fontSize: '13px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8',
+                      display: 'inline-block'
+                    }}>
+                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                      <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
+                      <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
+                        <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
+                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>dr.1234</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', paddingBottom: '40px' }}>
@@ -918,14 +990,34 @@ export default function LandingPage() {
       {showPasswordModal && pendingRincianEmp && (
         <div className="modal-overlay" onClick={() => { setShowPasswordModal(false); setPasswordError(''); }} style={{ zIndex: 10001 }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-glass)', maxWidth: '420px', width: '90vw', padding: '32px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#818cf8', fontSize: '24px' }}>
                 <i className="fas fa-lock"></i>
               </div>
               <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#f0f4ff', marginBottom: '8px' }}>Masukkan Password</h3>
               <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                Masukkan password untuk melihat rincian sertifikat <strong style={{ color: '#f0f4ff' }}>{pendingRincianEmp.nama}</strong>
+                Rincian sertifikat <strong style={{ color: '#f0f4ff' }}>{pendingRincianEmp.nama}</strong>
               </p>
+            </div>
+            
+            <div style={{
+              background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)',
+              borderRadius: '12px', padding: '16px', marginBottom: '24px', textAlign: 'left'
+            }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#34d399', marginBottom: '8px' }}>
+                <i className="fas fa-lightbulb" style={{ marginRight: '6px' }}></i>
+                Panduan Password Default
+              </div>
+              <div style={{ fontSize: '12px', color: '#e2e8f0', marginBottom: '12px', lineHeight: 1.5 }}>
+                Password: <strong style={{ color: '#fff' }}>3 digit awal Nama + 4 digit awal NIP</strong> (huruf kecil semua)
+              </div>
+              <div style={{ background: 'rgba(0,0,0,0.25)', padding: '10px 12px', borderRadius: '8px', fontSize: '12px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8' }}>
+                <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                <div style={{ marginBottom: '8px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
+                <div style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '6px', marginTop: '4px' }}>
+                  <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>dr.1234</strong>
+                </div>
+              </div>
             </div>
             <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
               <div style={{ marginBottom: '16px' }}>
