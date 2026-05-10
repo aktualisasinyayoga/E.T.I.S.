@@ -105,6 +105,7 @@ export default function LandingPage() {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [pendingRincianEmp, setPendingRincianEmp] = useState<Employee | null>(null);
 
   const generatePassword = (nama: string, nip: string) => {
@@ -118,6 +119,7 @@ export default function LandingPage() {
     setPendingRincianEmp(emp);
     setPasswordInput('');
     setPasswordError('');
+    setShowPassword(false);
     setShowPasswordModal(true);
   };
 
@@ -144,6 +146,7 @@ export default function LandingPage() {
       setShowPasswordModal(false);
       setPasswordInput('');
       setPasswordError('');
+      setShowPassword(false);
       window.location.href = `/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`;
     } else {
       setPasswordError('Password salah. Silakan coba lagi.');
@@ -1019,17 +1022,49 @@ export default function LandingPage() {
               </div>
             </div>
             <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: '16px', position: 'relative' }}>
                 <input
-                  type="text"
+                  type={showPassword ? "text" : "password"}
                   value={passwordInput}
                   onChange={(e) => { setPasswordInput(e.target.value); setPasswordError(''); }}
                   placeholder="Masukkan password..."
                   className="input-field"
-                  style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: passwordError ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.1)', color: '#fff', textAlign: 'center', fontSize: '16px', letterSpacing: '2px' }}
+                  style={{ 
+                    width: '100%', 
+                    background: 'rgba(255,255,255,0.05)', 
+                    border: passwordError ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.1)', 
+                    color: '#fff', 
+                    textAlign: 'center', 
+                    fontSize: '16px', 
+                    letterSpacing: showPassword ? '1px' : '4px',
+                    paddingRight: '46px'
+                  }}
                   autoFocus
                   autoComplete="off"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute',
+                    right: '12px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    padding: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'color 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} style={{ fontSize: '14px' }}></i>
+                </button>
                 {passwordError && (
                   <p style={{ color: '#f87171', fontSize: '12px', marginTop: '8px', textAlign: 'center' }}>
                     <i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{passwordError}
