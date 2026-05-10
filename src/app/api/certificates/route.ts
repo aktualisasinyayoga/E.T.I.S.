@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
         // Look up the employee's official name from employees.json
         const employees = getEmployees();
-        const employee = employees.find(e => e.id === body.employeeId);
+        const employee = employees.find(e => String(e.id) === String(body.employeeId));
         const officialName = employee ? employee.nama : (body.employeeName || 'Unknown');
 
         const newCert = {
@@ -64,15 +64,19 @@ export async function GET() {
         }
 
         // Map snake_case DB columns to camelCase for frontend
-        const certificates = (data || []).map(row => ({
-            id: row.id,
-            employeeId: row.employee_id,
-            employeeName: row.employee_name,
-            namaPelatihan: row.nama_pelatihan,
-            tanggalUpload: row.tanggal_upload,
-            jp: row.jp,
-            status: row.status,
-        }));
+        const employees = getEmployees();
+        const certificates = (data || []).map(row => {
+            const emp = employees.find(e => String(e.id) === String(row.employee_id));
+            return {
+                id: row.id,
+                employeeId: row.employee_id,
+                employeeName: emp ? emp.nama : (row.employee_name && row.employee_name !== 'Unknown' ? row.employee_name : 'Unknown'),
+                namaPelatihan: row.nama_pelatihan,
+                tanggalUpload: row.tanggal_upload,
+                jp: row.jp,
+                status: row.status,
+            };
+        });
 
         return NextResponse.json(certificates);
     } catch (err) {
@@ -109,7 +113,7 @@ export async function PUT(request: NextRequest) {
             // Update employee JP in the in-memory store
             const employees = getEmployees();
             const empIdx = employees.findIndex(e => 
-                e.nama === cert.employee_name || e.id === cert.employee_id
+                String(e.id) === String(cert.employee_id) || e.nama === cert.employee_name
             );
             if (empIdx !== -1) {
                 employees[empIdx].jumlahJP += cert.jp;
