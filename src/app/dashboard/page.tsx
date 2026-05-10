@@ -389,13 +389,14 @@ export default function DashboardPage() {
                         <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
                             <div style={{ marginBottom: '16px' }}>
                                 <input
-                                    type="password"
+                                    type="text"
                                     value={passwordInput}
                                     onChange={(e) => { setPasswordInput(e.target.value); setPasswordError(''); }}
                                     placeholder="Masukkan password..."
                                     className="input-field"
                                     style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: passwordError ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.1)', color: '#fff', textAlign: 'center', fontSize: '16px', letterSpacing: '2px' }}
                                     autoFocus
+                                    autoComplete="off"
                                 />
                                 {passwordError && (
                                     <p style={{ color: '#f87171', fontSize: '12px', marginTop: '8px', textAlign: 'center' }}>
