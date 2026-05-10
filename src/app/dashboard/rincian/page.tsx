@@ -40,7 +40,7 @@ function RincianContent() {
         return generateDefaultPassword(namaStr, nipStr);
     };
 
-    const handleChangePassword = () => {
+    const handleChangePassword = async () => {
         setChangePasswordError('');
         setChangePasswordSuccess(false);
 
@@ -58,19 +58,42 @@ function RincianContent() {
             return;
         }
 
-        localStorage.setItem(`rincian_password_${nama}`, newPassword);
-        if (emailStr.trim()) {
-            localStorage.setItem(`rincian_email_${nama}`, emailStr);
+        try {
+            // Sync to Supabase
+            const response = await fetch('/api/passwords', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nama: nama,
+                    nip: nip,
+                    password: newPassword
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Gagal menyinkronkan password ke database');
+            }
+
+            // Fallback for offline/local use
+            localStorage.setItem(`rincian_password_${nama}`, newPassword);
+            
+            if (emailStr.trim()) {
+                localStorage.setItem(`rincian_email_${nama}`, emailStr);
+            }
+            
+            setChangePasswordSuccess(true);
+            setOldPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
+            setEmailStr('');
+            setTimeout(() => {
+                setShowChangePassword(false);
+                setChangePasswordSuccess(false);
+            }, 2000);
+        } catch (err: any) {
+            console.error('Error changing password:', err);
+            setChangePasswordError(err.message || 'Terjadi kesalahan saat menyimpan password.');
         }
-        setChangePasswordSuccess(true);
-        setOldPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
-        setEmailStr('');
-        setTimeout(() => {
-            setShowChangePassword(false);
-            setChangePasswordSuccess(false);
-        }, 2000);
     };
 
     useEffect(() => {

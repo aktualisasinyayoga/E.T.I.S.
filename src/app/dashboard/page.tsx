@@ -34,6 +34,7 @@ export default function DashboardPage() {
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [passwordInput, setPasswordInput] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [passwordLoading, setPasswordLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [pendingRincianEmp, setPendingRincianEmp] = useState<Employee | null>(null);
 
@@ -52,33 +53,60 @@ export default function DashboardPage() {
         setShowPasswordModal(true);
     };
 
-    const handlePasswordSubmit = () => {
+    const handlePasswordSubmit = async () => {
         if (!pendingRincianEmp) return;
-        // Check localStorage for custom password first
-        const storedPassword = localStorage.getItem(`rincian_password_${pendingRincianEmp.nama}`);
-        const correctPassword = storedPassword || generatePassword(pendingRincianEmp.nama, pendingRincianEmp.nip);
-        if (passwordInput === correctPassword) {
-            // Set AuthContext user automatically if not admin
-            const currentUserStr = localStorage.getItem('hrd_user');
-            const currentUser = currentUserStr ? JSON.parse(currentUserStr) : null;
-            if (!currentUser || currentUser.role !== 'admin') {
-                localStorage.setItem('hrd_user', JSON.stringify({
-                    id: pendingRincianEmp.id,
-                    email: '',
-                    nama: pendingRincianEmp.nama,
-                    nip: pendingRincianEmp.nip,
-                    isRegistered: true,
-                    role: 'user'
-                }));
+        
+        setPasswordLoading(true);
+        setPasswordError('');
+
+        try {
+            // 1. Check Supabase via API first
+            const response = await fetch(`/api/passwords?nama=${encodeURIComponent(pendingRincianEmp.nama)}`);
+            const data = await response.json();
+            
+            let correctPassword = data.password;
+
+            // 2. Fallback to localStorage
+            if (!correctPassword) {
+                correctPassword = localStorage.getItem(`rincian_password_${pendingRincianEmp.nama}`);
             }
 
-            setShowPasswordModal(false);
-            setPasswordInput('');
-            setPasswordError('');
-            setShowPassword(false);
-            window.open(`/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`, '_blank');
-        } else {
-            setPasswordError('Password salah. Silakan coba lagi.');
+            // 3. Fallback to default
+            if (!correctPassword) {
+                correctPassword = generatePassword(pendingRincianEmp.nama, pendingRincianEmp.nip);
+            }
+
+            if (passwordInput === correctPassword) {
+                // Set AuthContext user automatically if not admin
+                const currentUserStr = localStorage.getItem('hrd_user');
+                const currentUser = currentUserStr ? JSON.parse(currentUserStr) : null;
+                if (!currentUser || currentUser.role !== 'admin') {
+                    localStorage.setItem('hrd_user', JSON.stringify({
+                        id: pendingRincianEmp.id,
+                        email: '',
+                        nama: pendingRincianEmp.nama,
+                        nip: pendingRincianEmp.nip,
+                        isRegistered: true,
+                        role: 'user'
+                    }));
+                }
+
+                // Sync to local
+                localStorage.setItem(`rincian_password_${pendingRincianEmp.nama}`, correctPassword);
+
+                setShowPasswordModal(false);
+                setPasswordInput('');
+                setPasswordError('');
+                setShowPassword(false);
+                window.open(`/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`, '_blank');
+            } else {
+                setPasswordError('Password salah. Silakan coba lagi.');
+            }
+        } catch (err) {
+            console.error('Error verifying password:', err);
+            setPasswordError('Gagal memverifikasi password.');
+        } finally {
+            setPasswordLoading(false);
         }
     };
 
@@ -444,8 +472,12 @@ export default function DashboardPage() {
                                     flex: 1, padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
                                     color: 'var(--text-secondary)', fontSize: '14px', fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
                                 }}>Batal</button>
-                                <button type="submit" className="shimmer-btn" style={{ flex: 1, padding: '12px', fontSize: '14px' }}>
-                                    <i className="fas fa-unlock" style={{ marginRight: '8px' }}></i>Buka Rincian
+                                <button type="submit" className="shimmer-btn" style={{ flex: 1, padding: '12px', fontSize: '14px' }} disabled={passwordLoading}>
+                                    {passwordLoading ? (
+                                        <><i className="fas fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>Memproses...</>
+                                    ) : (
+                                        <><i className="fas fa-unlock" style={{ marginRight: '8px' }}></i>Buka Rincian</>
+                                    )}
                                 </button>
                             </div>
                         </form>
