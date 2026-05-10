@@ -83,6 +83,22 @@ function RincianContent() {
         setNip(urlNip);
         setTotalJp(baseJp);
 
+        // Auto-login user if accessing this page with valid params (Session Healing)
+        if (urlNama && urlNip && urlEmpId > 0) {
+            const currentUserStr = localStorage.getItem('hrd_user');
+            const currentUser = currentUserStr ? JSON.parse(currentUserStr) : null;
+            if (!currentUser || currentUser.role !== 'admin') {
+                localStorage.setItem('hrd_user', JSON.stringify({
+                    id: urlEmpId,
+                    email: '',
+                    nama: urlNama,
+                    nip: urlNip,
+                    isRegistered: true,
+                    role: 'user'
+                }));
+            }
+        }
+
         // Fetch real certificates from Supabase (only approved ones for this employee)
         const fetchCertificates = async () => {
             try {
