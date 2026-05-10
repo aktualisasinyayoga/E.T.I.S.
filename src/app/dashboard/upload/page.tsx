@@ -116,9 +116,9 @@ export default function UploadPage() {
             } else {
                 alert(`Gagal mengupload sertifikat: ${data.error || 'Terjadi kesalahan pada server'}`);
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error('Upload failed:', err);
-            alert(`Gagal mengupload sertifikat: Jaringan atau server bermasalah`);
+            alert(`Gagal mengupload sertifikat: ${err.message || 'Jaringan atau server bermasalah'}`);
         } finally {
             setIsUploading(false);
         }
