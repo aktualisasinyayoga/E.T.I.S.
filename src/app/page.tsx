@@ -934,7 +934,7 @@ export default function LandingPage() {
                 <thead style={{ position: 'sticky', top: '-24px', background: 'var(--bg-card)', zIndex: 10 }}>
                   <tr>
                     <th>No</th>
-                    <th>Nama / NIP</th>
+                    <th>Nama</th>
                     <th>Pangkat/Gol</th>
                     <th>Jabatan</th>
                     <th>Total JP</th>
@@ -948,7 +948,6 @@ export default function LandingPage() {
                         <td style={{ color: '#fff' }}>{idx + 1}</td>
                         <td>
                           <div style={{ fontWeight: 600, color: '#f0f4ff' }}>{emp.nama}</div>
-                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '2px' }}>{emp.nip}</div>
                         </td>
                         <td>
                           <div style={{ color: '#e2e8f0' }}>{emp.pangkat}</div>

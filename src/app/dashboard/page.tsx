@@ -313,7 +313,6 @@ export default function DashboardPage() {
                                                 <td>{idx + 1}</td>
                                                 <td>
                                                     <div style={{ fontWeight: 600 }}>{emp.nama}</div>
-                                                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '2px' }}>{emp.nip}</div>
                                                 </td>
                                                 <td>
                                                     <div>{emp.pangkat}</div>
