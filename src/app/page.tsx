@@ -139,6 +139,12 @@ export default function LandingPage() {
         correctPassword = localStorage.getItem(`rincian_password_${pendingRincianEmp.nama}`);
       }
 
+      // 4. Migration check: If the password matches the old default pattern, override with new default (NIP)
+      const oldDefault = pendingRincianEmp.nama.split(' ')[0].substring(0, 3).toLowerCase() + pendingRincianEmp.nip.substring(0, 4);
+      if (correctPassword === oldDefault) {
+        correctPassword = pendingRincianEmp.nip;
+      }
+
       // 3. If still not found, use default generated password
       if (!correctPassword) {
         correctPassword = generatePassword(pendingRincianEmp.nama, pendingRincianEmp.nip);
