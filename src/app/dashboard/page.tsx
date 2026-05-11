@@ -101,6 +101,7 @@ export default function DashboardPage() {
                 setPasswordInput('');
                 setPasswordError('');
                 setShowPassword(false);
+                alert('Segera ganti password!');
                 window.open(`/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`, '_blank');
             } else {
                 setPasswordError('Password salah. Silakan coba lagi.');
@@ -419,10 +420,7 @@ export default function DashboardPage() {
                                     <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>123456</strong>
                                 </div>
                             </div>
-                            <div style={{ marginTop: '12px', padding: '8px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '6px', textAlign: 'center' }}>
-                                <strong style={{ color: '#f87171', fontSize: '12px' }}>⚠️ Segera ganti password setelah login!</strong>
                             </div>
-                        </div>
                         <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
                             <div style={{ marginBottom: '16px', position: 'relative' }}>
                                 <input
