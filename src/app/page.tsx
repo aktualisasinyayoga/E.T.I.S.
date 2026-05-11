@@ -172,7 +172,9 @@ export default function LandingPage() {
         setPasswordInput('');
         setPasswordError('');
         setShowPassword(false);
-        alert('Segera ganti password!');
+        if (correctPassword === pendingRincianEmp.nip) {
+          alert('Segera ganti password!');
+        }
         window.location.href = `/dashboard/rincian?nama=${encodeURIComponent(pendingRincianEmp.nama)}&nip=${encodeURIComponent(pendingRincianEmp.nip)}&jp=${pendingRincianEmp.jumlahJP}&empId=${pendingRincianEmp.id}`;
       } else {
         setPasswordError('Password salah. Silakan coba lagi.');
