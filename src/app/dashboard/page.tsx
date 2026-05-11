@@ -39,10 +39,7 @@ export default function DashboardPage() {
     const [pendingRincianEmp, setPendingRincianEmp] = useState<Employee | null>(null);
 
     const generatePassword = (nama: string, nip: string) => {
-        const firstName = nama.split(' ')[0];
-        const first3 = firstName.substring(0, 3).toLowerCase();
-        const first4nip = nip.substring(0, 4);
-        return first3 + first4nip;
+        return nip;
     };
 
     const handleRincianClick = (emp: Employee) => {
@@ -407,14 +404,17 @@ export default function DashboardPage() {
                                 Panduan Password Default
                             </div>
                             <div style={{ fontSize: '12px', color: '#e2e8f0', marginBottom: '12px', lineHeight: 1.5 }}>
-                                Password: <strong style={{ color: '#fff' }}>3 digit awal Nama + 4 digit awal NIP</strong> (huruf kecil semua)
+                                Password default: <strong style={{ color: '#fff' }}>Nomor Induk Pegawai (NIP)</strong>
                             </div>
                             <div style={{ background: 'rgba(0,0,0,0.25)', padding: '10px 12px', borderRadius: '8px', fontSize: '12px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8' }}>
                                 <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
                                 <div style={{ marginBottom: '8px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                                 <div style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '6px', marginTop: '4px' }}>
-                                    <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>dr.1234</strong>
+                                    <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>123456</strong>
                                 </div>
+                            </div>
+                            <div style={{ marginTop: '12px', padding: '8px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '6px', textAlign: 'center' }}>
+                                <strong style={{ color: '#f87171', fontSize: '12px' }}>⚠️ Segera ganti password setelah login!</strong>
                             </div>
                         </div>
                         <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>

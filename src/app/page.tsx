@@ -110,10 +110,7 @@ export default function LandingPage() {
   const [pendingRincianEmp, setPendingRincianEmp] = useState<Employee | null>(null);
 
   const generatePassword = (nama: string, nip: string) => {
-    const firstName = nama.split(' ')[0];
-    const first3 = firstName.substring(0, 3).toLowerCase();
-    const first4nip = nip.substring(0, 4);
-    return first3 + first4nip;
+    return nip;
   };
 
   const handleRincianClick = (emp: Employee) => {
@@ -699,7 +696,7 @@ export default function LandingPage() {
                       Panduan Password Rincian Sertifikat
                     </h4>
                     <p style={{ fontSize: '14px', color: '#e2e8f0', marginBottom: '12px', fontWeight: 500 }}>
-                      Password default: <span style={{ color: '#cbd5e1' }}>3 digit awal Nama + 4 digit awal NIP (huruf kecil semua)</span>
+                      Password default: <span style={{ color: '#cbd5e1' }}>Nomor Induk Pegawai (NIP)</span>
                     </p>
                     <div style={{ 
                       background: 'rgba(15, 23, 42, 0.6)', padding: '12px 16px', borderRadius: '8px', 
@@ -711,7 +708,7 @@ export default function LandingPage() {
                       <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                       <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
                         <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
-                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>dr.1234</span>
+                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>123456</span>
                       </div>
                     </div>
                   </div>
@@ -759,7 +756,7 @@ export default function LandingPage() {
                       Panduan Password Rincian Sertifikat
                     </h4>
                     <p style={{ fontSize: '14px', color: '#e2e8f0', marginBottom: '12px', fontWeight: 500 }}>
-                      Password default: <span style={{ color: '#cbd5e1' }}>3 digit awal Nama + 4 digit awal NIP (huruf kecil semua)</span>
+                      Password default: <span style={{ color: '#cbd5e1' }}>Nomor Induk Pegawai (NIP)</span>
                     </p>
                     <div style={{ 
                       background: 'rgba(15, 23, 42, 0.6)', padding: '12px 16px', borderRadius: '8px', 
@@ -771,7 +768,7 @@ export default function LandingPage() {
                       <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                       <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
                         <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
-                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>dr.1234</span>
+                        <span style={{ color: '#10b981', fontWeight: 800, fontSize: '15px' }}>123456</span>
                       </div>
                     </div>
                   </div>
@@ -1039,14 +1036,17 @@ export default function LandingPage() {
                 Panduan Password Default
               </div>
               <div style={{ fontSize: '12px', color: '#e2e8f0', marginBottom: '12px', lineHeight: 1.5 }}>
-                Password: <strong style={{ color: '#fff' }}>3 digit awal Nama + 4 digit awal NIP</strong> (huruf kecil semua)
+                Password default: <strong style={{ color: '#fff' }}>Nomor Induk Pegawai (NIP)</strong>
               </div>
               <div style={{ background: 'rgba(0,0,0,0.25)', padding: '10px 12px', borderRadius: '8px', fontSize: '12px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8' }}>
                 <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
                 <div style={{ marginBottom: '8px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                 <div style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '6px', marginTop: '4px' }}>
-                  <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>dr.1234</strong>
+                  <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>123456</strong>
                 </div>
+              </div>
+              <div style={{ marginTop: '12px', padding: '8px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '6px', textAlign: 'center' }}>
+                <strong style={{ color: '#f87171', fontSize: '12px' }}>⚠️ Segera ganti password setelah login!</strong>
               </div>
             </div>
             <form onSubmit={(e) => { e.preventDefault(); handlePasswordSubmit(); }}>
