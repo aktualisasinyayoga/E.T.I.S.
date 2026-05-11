@@ -710,7 +710,7 @@ export default function LandingPage() {
                       fontSize: '13px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8',
                       display: 'inline-block'
                     }}>
-                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Muhammad Yoga Ridwan</span></div>
                       <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                       <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
                         <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
@@ -770,7 +770,7 @@ export default function LandingPage() {
                       fontSize: '13px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8',
                       display: 'inline-block'
                     }}>
-                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                      <div style={{ marginBottom: '4px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Muhammad Yoga Ridwan</span></div>
                       <div style={{ marginBottom: '8px' }}><span style={{ color: '#f8fafc', width: '60px', display: 'inline-block' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                       <div style={{ borderTop: '1px dashed rgba(148, 163, 184, 0.3)', paddingTop: '8px', marginTop: '4px' }}>
                         <span style={{ color: '#f8fafc', width: '60px', display: 'inline-block', fontWeight: 700 }}>Password:</span> 
@@ -1045,7 +1045,7 @@ export default function LandingPage() {
                 Password default: <strong style={{ color: '#fff' }}>Nomor Induk Pegawai (NIP)</strong>
               </div>
               <div style={{ background: 'rgba(0,0,0,0.25)', padding: '10px 12px', borderRadius: '8px', fontSize: '12px', fontFamily: '"JetBrains Mono", monospace', color: '#94a3b8' }}>
-                <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Dr. ADITYA SARSITO</span></div>
+                <div style={{ marginBottom: '4px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Nama:</span> <span style={{ color: '#38bdf8' }}>Muhammad Yoga Ridwan</span></div>
                 <div style={{ marginBottom: '8px' }}><span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>NIP:</span> <span style={{ color: '#38bdf8' }}>123456</span></div>
                 <div style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '6px', marginTop: '4px' }}>
                   <span style={{ color: '#cbd5e1', display: 'inline-block', width: '50px' }}>Pass:</span> <strong style={{ color: '#34d399', fontSize: '14px' }}>123456</strong>
