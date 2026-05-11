@@ -3,7 +3,7 @@ import employees from '@/data/employees.json';
 
 export async function POST(request: Request) {
     try {
-        const { nama, nip } = await request.json();
+        const { nip } = await request.json();
 
         const employee = employees.find((e) => e.nip === nip);
 

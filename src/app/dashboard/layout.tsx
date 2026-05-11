@@ -11,14 +11,15 @@ const menuItems = [
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-    const { user, isLoading, logout } = useAuth();
+    const { user, logout } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
+        // Use a microtask to avoid synchronous setState inside useEffect
+        Promise.resolve().then(() => setMounted(true));
     }, []);
 
     const isRincianPage = pathname?.startsWith('/dashboard/rincian');

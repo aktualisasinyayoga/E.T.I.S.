@@ -29,12 +29,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const savedUser = localStorage.getItem('hrd_user');
     if (savedUser) {
       try {
-        setUser(JSON.parse(savedUser));
+        const parsed = JSON.parse(savedUser);
+        Promise.resolve().then(() => setUser(parsed));
       } catch {
         localStorage.removeItem('hrd_user');
       }
     }
-    setIsLoading(false);
+    Promise.resolve().then(() => setIsLoading(false));
   }, []);
 
   const login = async (nip: string): Promise<{ needsRegistration: boolean }> => {

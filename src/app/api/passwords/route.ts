@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Use upsert to create or update the password for this employee name
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('user_passwords')
             .upsert({ 
                 employee_nama: nama,

@@ -90,9 +90,10 @@ function RincianContent() {
                 setShowChangePassword(false);
                 setChangePasswordSuccess(false);
             }, 2000);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error changing password:', err);
-            setChangePasswordError(err.message || 'Terjadi kesalahan saat menyimpan password.');
+            const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan saat menyimpan password.';
+            setChangePasswordError(errorMessage);
         }
     };
 
